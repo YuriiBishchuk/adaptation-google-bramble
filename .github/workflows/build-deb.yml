@@ -35,9 +35,10 @@ jobs:
                 debhelper \
                 dpkg-dev
               dpkg-buildpackage -us -uc -b
+              mkdir -p /build/output
+              mv /*.deb /build/output/
+              ls -lh /build/output/
             "
-          mv ../adaptation-google-bramble*.deb output/ 2>/dev/null || true
-          ls -lh output/
 
       - name: Upload Debian Package Artifacts
         uses: actions/upload-artifact@v4
