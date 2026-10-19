@@ -8,7 +8,7 @@ Conflicts=phosh.service
 [Service]
 Type=oneshot
 RemainAfterExit=no
-ExecStart=/usr/bin/python3 -u /usr/local/bin/bramblegate.py
+ExecStart=/usr/bin/python3 -u /usr/bin/bramblegate.py
 StandardInput=null
 StandardOutput=journal
 StandardError=journal
