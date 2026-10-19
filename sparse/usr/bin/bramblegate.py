@@ -16,6 +16,28 @@ import fcntl
 import ctypes
 import subprocess
 
+# Check if disabled via config file or kernel command line
+CONFIG_FILE = "/etc/default/bramblegate"
+if os.path.exists(CONFIG_FILE):
+    try:
+        with open(CONFIG_FILE, "r") as cf:
+            for line in cf:
+                if line.strip().startswith("ENABLED=0") or line.strip().startswith("ENABLED=false"):
+                    print("⏩ [BrambleGate] Disabled via /etc/default/bramblegate. Handing over directly to desktop...", flush=True)
+                    sys.exit(0)
+    except Exception:
+        pass
+
+if os.path.exists("/proc/cmdline"):
+    try:
+        with open("/proc/cmdline", "r") as kf:
+            cmdline = kf.read()
+            if "nobramblegate" in cmdline or "bramblegate=0" in cmdline:
+                print("⏩ [BrambleGate] Disabled via kernel cmdline. Handing over directly to desktop...", flush=True)
+                sys.exit(0)
+    except Exception:
+        pass
+
 print("🚀 [BrambleGate] Starting Cairo Stage-1 Mobile Boot Manager...", flush=True)
 
 # ---------------------------------------------------------
