@@ -25,4 +25,9 @@ if [ -d /etc/mobile-config-firefox ]; then
     find /etc/mobile-config-firefox -type f -exec touch -t 197001010000.00 {} + 2>/dev/null || true
 fi
 
+# Skip non-mobile adapted timezone screen in initial-setup
+if [ -f /etc/gnome-initial-setup/vendor.conf ]; then
+    sed -i 's/skip=.*password.*/skip=account;parental-controls;password;timezone/' /etc/gnome-initial-setup/vendor.conf 2>/dev/null || true
+fi
+
 exit 0
