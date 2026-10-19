@@ -10,4 +10,19 @@ chmod 666 /dev/ion /dev/kgsl-3d0 /dev/dri/card0 /dev/dri/renderD128 /dev/input/e
 # Mask android-composer to prevent DRM master contention
 systemctl mask android-composer.service 2>/dev/null || true
 
+# Disable libhybris EGL vendor so libglvnd defaults to native Mesa
+if [ -f /usr/share/glvnd/egl_vendor.d/10_libhybris.json ]; then
+    mv /usr/share/glvnd/egl_vendor.d/10_libhybris.json /usr/share/glvnd/egl_vendor.d/10_libhybris.json.disabled 2>/dev/null || true
+fi
+
+# Mask broken API33 selinux stubs dropin on android-mount
+mkdir -p /etc/systemd/system/android-mount.service.d
+ln -sf /dev/null /etc/systemd/system/android-mount.service.d/10-selinux.conf 2>/dev/null || true
+
+
+# Fix timestamp for mobile-config-firefox fragments to prevent infinite restart loop before NTP sync
+if [ -d /etc/mobile-config-firefox ]; then
+    find /etc/mobile-config-firefox -type f -exec touch -t 197001010000.00 {} + 2>/dev/null || true
+fi
+
 exit 0

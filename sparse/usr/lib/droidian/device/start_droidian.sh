@@ -77,10 +77,12 @@ fi
 #   the notification shade / any dma-buf overlay crashes the compositor.
 [ -e /dev/ion ]            || mknod /dev/ion c 10 55 2>/dev/null || true
 [ -e /dev/kgsl-3d0 ]       || mknod /dev/kgsl-3d0 c 510 0 2>/dev/null || true
-[ -e /dev/dri/card0 ]      || mknod /dev/dri/card0 c 226 0 2>/dev/null || true
-[ -e /dev/dri/renderD128 ] || mknod /dev/dri/renderD128 c 226 128 2>/dev/null || true
+[ -e /dev/input/event0 ]   || mknod /dev/input/event0 c 13 64 2>/dev/null || true
+[ -e /dev/input/event1 ]   || mknod /dev/input/event1 c 13 65 2>/dev/null || true
 [ -e /dev/input/event2 ]   || mknod /dev/input/event2 c 13 66 2>/dev/null || true
-chmod 666 /dev/ion /dev/kgsl-3d0 /dev/dri/card0 /dev/dri/renderD128 /dev/input/event2 2>/dev/null || true
+chmod 666 /dev/ion /dev/kgsl-3d0 /dev/dri/card0 /dev/dri/renderD128 2>/dev/null || true
+chmod 660 /dev/input/event* 2>/dev/null || true
+chown -R root:android_input /dev/input 2>/dev/null || true
 
 # Udev entry for Focaltech FT5446 Touchscreen
 echo "I:1000" > /run/udev/data/c13:66
