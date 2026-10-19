@@ -1,0 +1,14 @@
+[Unit]
+Description=Android Properties & HWServiceManager Bridge
+After=lxc@android.service android-hwservicemanager.service
+Wants=lxc@android.service android-hwservicemanager.service
+Before=android-composer.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+TimeoutStartSec=10s
+ExecStart=/usr/local/bin/android-properties-bridge.sh
+
+[Install]
+WantedBy=multi-user.target

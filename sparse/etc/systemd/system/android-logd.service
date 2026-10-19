@@ -1,0 +1,13 @@
+[Unit]
+Description=Android Log Daemon
+After=local-fs.target
+Wants=local-fs.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -- /system/bin/logd
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

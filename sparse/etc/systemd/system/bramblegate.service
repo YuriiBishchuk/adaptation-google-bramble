@@ -1,0 +1,17 @@
+[Unit]
+Description=BrambleGate Stage-1 Mobile Boot Manager
+DefaultDependencies=no
+After=systemd-udev-settle.service
+Before=phosh.service display-manager.service graphical.target
+Conflicts=phosh.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=no
+ExecStart=/usr/bin/python3 -u /usr/local/bin/bramblegate.py
+StandardInput=null
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=sysinit.target

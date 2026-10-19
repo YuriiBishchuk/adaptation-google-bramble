@@ -1,0 +1,13 @@
+[Unit]
+Description=Android QTI Display Allocator
+After=android-hwservicemanager.service
+Requires=android-hwservicemanager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -v LD_PRELOAD=/vendor/lib64/libselinux_stubs.so -- /vendor/bin/hw/vendor.qti.hardware.display.allocator-service
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

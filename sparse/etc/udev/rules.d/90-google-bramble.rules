@@ -1,0 +1,7 @@
+# Google Pixel 4a (5G) (bramble) - FocalTech FT5446 Touchscreen
+ACTION=="add|change", KERNEL=="event*", ATTRS{name}=="fts", \
+	ENV{ID_INPUT}="1", \
+	ENV{ID_INPUT_TOUCHSCREEN}="1", \
+	ENV{ID_INPUT_WIDTH_MM}="66", \
+	ENV{ID_INPUT_HEIGHT_MM}="144", \
+	ENV{WL_OUTPUT}="DSI-1"

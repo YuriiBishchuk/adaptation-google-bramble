@@ -1,0 +1,38 @@
+lxc.rootfs.path = /var/lib/lxc/android/rootfs
+lxc.uts.name = aarch64
+
+lxc.net.0.type = none
+
+#lxc.tty.dir = lxc
+lxc.tty.max = 0
+lxc.pty.max = 1024
+lxc.arch = aarch64
+lxc.cap.drop = mac_admin mac_override
+
+lxc.hook.pre-start = /var/lib/lxc/android/pre-start.sh
+
+lxc.init.cmd = /system/bin/sleep 999999999
+
+lxc.apparmor.profile = unconfined
+lxc.autodev = 1
+
+lxc.mount.entry = tmpfs dev tmpfs nosuid 0 0
+lxc.mount.entry = /dev/__properties__ dev/__properties__ bind bind,create=dir 0 0
+lxc.mount.entry = /dev/binderfs dev/binderfs bind bind,create=dir,optional 0 0
+lxc.mount.entry = /dev/socket dev/socket bind bind,create=dir 0 0
+lxc.mount.entry = proc proc proc nodev,noexec,nosuid 0 0
+lxc.mount.entry = sys sys sysfs nodev,noexec,nosuid 0 0
+#lxc.mount.entry = tmp tmp tmpfs nodev,noexec,nosuid 0 0
+lxc.mount.entry = /android/data data bind bind 0 0
+lxc.mount.entry = /mnt mnt bind rbind 0 0
+lxc.mount.entry = /apex apex bind rbind,optional 0 0
+#lxc.mount.entry = /odm odm bind bind,optional 0 0
+#lxc.mount.entry = /vendor_dlkm vendor_dlkm bind bind,optional 0 0
+lxc.namespace.keep = user ipc cgroup pid
+
+lxc.cap.drop = mac_admin mac_override sys_boot sys_time sys_rawio
+lxc.hook.autodev = /var/lib/lxc/android/autodev.sh
+
+lxc.cap.drop = mac_admin mac_override sys_boot sys_time sys_rawio
+
+lxc.cap.drop = mac_admin mac_override sys_boot sys_time sys_rawio

@@ -1,0 +1,13 @@
+[Unit]
+Description=Android VNDServiceManager
+After=android-hwservicemanager.service
+Requires=android-hwservicemanager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -v LD_PRELOAD=/vendor/lib64/libselinux_stubs.so -- /vendor/bin/vndservicemanager /dev/vndbinder
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+# Pin mesa-vulkan-drivers so system upgrades do not overwrite KGSL-enabled Turnip
+apt-mark hold mesa-vulkan-drivers 2>/dev/null || true
+
+# Ensure permissions on hardware nodes
+chmod 666 /dev/ion /dev/kgsl-3d0 /dev/dri/card0 /dev/dri/renderD128 /dev/input/event* 2>/dev/null || true
+
+# Mask android-composer to prevent DRM master contention
+systemctl mask android-composer.service 2>/dev/null || true
+
+exit 0

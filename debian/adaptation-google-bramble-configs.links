@@ -1,0 +1,2 @@
+/usr/lib/adaptation-google-bramble/sources.list.d/community-google-bramble.list /etc/apt/sources.list.d/community-google-bramble.list
+/usr/lib/adaptation-google-bramble/trusted.gpg.d/community-google-bramble.gpg /etc/apt/trusted.gpg.d/community-google-bramble.gpg

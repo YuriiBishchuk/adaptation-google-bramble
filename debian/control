@@ -1,0 +1,19 @@
+Source: adaptation-google-bramble
+Maintainer: YuriiBishchuk <13828463+YuriiBishchuk@users.noreply.github.com>
+Section: metapackages
+Priority: optional
+Build-Depends: debhelper (>= 10),
+               debhelper-compat (= 13),
+Standards-Version: 4.5.0.3
+
+Package: adaptation-google-bramble
+Architecture: arm64
+Depends: ${misc:Depends},
+         adaptation-hybris-api30-phone,
+         adaptation-google-bramble-configs (= ${binary:Version}),
+Description: Community adaptation for google-bramble - metapackage
+
+Package: adaptation-google-bramble-configs
+Architecture: arm64
+Depends: ${misc:Depends},
+Description: Community adaptation for google-bramble - adaptation configurations

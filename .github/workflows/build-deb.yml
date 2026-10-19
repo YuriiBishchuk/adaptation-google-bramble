@@ -1,0 +1,54 @@
+name: Build Droidian Adaptation Package
+
+on:
+  push:
+    branches: [ master, main ]
+    tags: [ 'v*' ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build-deb:
+    name: Build ARM64 Debian Packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up QEMU for ARM64
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - name: Build Debian Packages inside Debian Trixie Container
+        run: |
+          mkdir -p output
+          docker run --rm --platform linux/arm64 \
+            -v "$GITHUB_WORKSPACE:/build" \
+            -w /build \
+            debian:trixie-slim /bin/bash -c "
+              set -e
+              apt-get update
+              apt-get install -y --no-install-recommends \
+                build-essential \
+                debhelper \
+                dpkg-dev
+              dpkg-buildpackage -us -uc -b
+            "
+          mv ../adaptation-google-bramble*.deb output/ 2>/dev/null || true
+          ls -lh output/
+
+      - name: Upload Debian Package Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: adaptation-google-bramble-debs
+          path: output/*.deb
+          if-no-files-found: error
+
+      - name: Create GitHub Release on Tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: output/*.deb
+          generate_release_notes: true

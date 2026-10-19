@@ -1,0 +1,13 @@
+[Unit]
+Description=Android HWServiceManager
+After=local-fs.target lxc@android.service
+Wants=local-fs.target lxc@android.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -- /system/bin/hwservicemanager
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

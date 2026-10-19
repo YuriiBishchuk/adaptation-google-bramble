@@ -1,0 +1,23 @@
+# Qualcomm Adreno GPU & Display
+ACTION=="add", KERNEL=="kgsl-3d0", OWNER="system", GROUP="system", MODE="0666"
+ACTION=="add", KERNEL=="ion", OWNER="system", GROUP="system", MODE="0664"
+ACTION=="add", KERNEL=="msm_drm", OWNER="system", GROUP="graphics", MODE="0666"
+ACTION=="add", KERNEL=="dri/card*", OWNER="system", GROUP="graphics", MODE="0666"
+ACTION=="add", KERNEL=="dri/renderD*", OWNER="system", GROUP="render", MODE="0666"
+
+# Hexagon DSP / FastRPC (Sensors & Audio)
+ACTION=="add", KERNEL=="adsprpc-smd", OWNER="system", GROUP="system", MODE="0664"
+ACTION=="add", KERNEL=="adsprpc-smd-secure", OWNER="system", GROUP="system", MODE="0664"
+ACTION=="add", KERNEL=="sdsprpc-smd", OWNER="system", GROUP="system", MODE="0664"
+ACTION=="add", KERNEL=="cdsprpc-smd", OWNER="system", GROUP="system", MODE="0664"
+
+# Audio & Codec
+ACTION=="add", KERNEL=="wcd_dsp0_control", OWNER="system", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="wcd-dsp-glink", OWNER="system", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="msm_audio_cal", OWNER="system", GROUP="audio", MODE="0660"
+ACTION=="add", KERNEL=="msm_cirrus_playback", OWNER="system", GROUP="audio", MODE="0660"
+
+# Qualcomm IPC & Subsystems
+ACTION=="add", KERNEL=="msm_ipc_logging", OWNER="root", GROUP="system", MODE="0660"
+ACTION=="add", KERNEL=="subsys_*", OWNER="system", GROUP="system", MODE="0640"
+ACTION=="add", KERNEL=="sensors", OWNER="system", GROUP="system", MODE="0660"
