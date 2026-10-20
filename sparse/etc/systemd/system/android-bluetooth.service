@@ -6,6 +6,8 @@ Before=bluebinder.service
 
 [Service]
 Type=simple
+ExecStartPre=-/usr/bin/pkill -f android.hardware.bluetooth@1.0-service-qti
+ExecStartPre=-/bin/sh -c 'chmod 666 /dev/btpower /dev/ttyHS0 /dev/rfkill 2>/dev/null || true'
 ExecStart=/usr/bin/lxc-attach -n android -v LD_PRELOAD=/system/lib64/libhwservice_shim.so:/system/lib64/libselinux_stubs.so -- /vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
 Restart=always
 RestartSec=1s

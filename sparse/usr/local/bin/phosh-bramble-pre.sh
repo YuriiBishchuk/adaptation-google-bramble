@@ -15,9 +15,10 @@ done
 [ -e /dev/input/event1 ]   || mknod /dev/input/event1 c 13 65 2>/dev/null || true
 [ -e /dev/input/event2 ]   || mknod /dev/input/event2 c 13 66 2>/dev/null || true
 [ -e /dev/ttyHS0 ]         || mknod /dev/ttyHS0 c 237 0 2>/dev/null || true
+[ -e /dev/btpower ]        || mknod /dev/btpower c 500 0 2>/dev/null || true
 [ -e /dev/uinput ]         || mknod /dev/uinput c 10 223 2>/dev/null || true
 
-chmod 666 /dev/ion /dev/kgsl-3d0 /dev/dri/card0 /dev/dri/renderD128 /dev/uinput /dev/ttyHS0 2>/dev/null || true
+chmod 666 /dev/ion /dev/kgsl-3d0 /dev/dri/card0 /dev/dri/renderD128 /dev/uinput /dev/ttyHS0 /dev/btpower 2>/dev/null || true
 chmod 666 /dev/input/event0 /dev/input/event1 /dev/input/event2 2>/dev/null || true
 
 # Synthetic udev database for libinput

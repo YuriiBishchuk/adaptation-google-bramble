@@ -1,3 +1,13 @@
+adaptation-google-bramble (1.0-2) unstable; urgency=medium
+
+  * Add Bluetooth 5.2 integration via QTI HAL and bluebinder over /dev/vhci.
+  * Fix /dev/ttyHS0 major node number (237 for msm_geni_serial_hs).
+  * Fix sleep/wake power button behavior via GNOME power schema override.
+  * Update base adaptation dependency to adaptation-hybris-api33-phone.
+  * Ensure Phosh session executes natively under droidian user (uid 32011).
+
+ -- Yurii Bishchuk <13828463+YuriiBishchuk@users.noreply.github.com>  Tue, 20 Oct 2026 13:50:00 +0300
+
 adaptation-google-bramble (1.0-1) unstable; urgency=medium
 
   * Initial release of Google Pixel 4a (5G) (bramble) Droidian adaptation.
