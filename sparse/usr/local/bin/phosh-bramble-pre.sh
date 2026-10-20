@@ -14,7 +14,7 @@ done
 [ -e /dev/input/event0 ]   || mknod /dev/input/event0 c 13 64 2>/dev/null || true
 [ -e /dev/input/event1 ]   || mknod /dev/input/event1 c 13 65 2>/dev/null || true
 [ -e /dev/input/event2 ]   || mknod /dev/input/event2 c 13 66 2>/dev/null || true
-[ -e /dev/ttyHS0 ]         || mknod /dev/ttyHS0 c 237 0 2>/dev/null || true
+[ -e /dev/ttyHS0 ]         || mknod /dev/ttyHS0 c 236 0 2>/dev/null || true
 [ -e /dev/btpower ]        || mknod /dev/btpower c 500 0 2>/dev/null || true
 [ -e /dev/uinput ]         || mknod /dev/uinput c 10 223 2>/dev/null || true
 

@@ -1,7 +1,7 @@
 [Unit]
 Description=Android Bluetooth QTI HAL Service
-After=android-hwservicemanager.service
-Requires=android-hwservicemanager.service
+After=lxc@android.service android-hwservicemanager.service android-servicemanager.service android-suspend.service qcom-subsys-modem.service
+Requires=lxc@android.service android-hwservicemanager.service android-servicemanager.service android-suspend.service qcom-subsys-modem.service
 Before=bluebinder.service
 
 [Service]

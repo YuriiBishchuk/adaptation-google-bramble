@@ -1,0 +1,13 @@
+[Unit]
+Description=Android System Suspend AIDL/HIDL Service
+After=lxc@android.service android-servicemanager.service android-hwservicemanager.service
+Requires=lxc@android.service android-servicemanager.service android-hwservicemanager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -- /system/bin/hw/android.system.suspend@1.0-service
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

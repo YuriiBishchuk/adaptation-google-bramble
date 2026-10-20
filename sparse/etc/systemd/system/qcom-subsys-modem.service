@@ -1,0 +1,17 @@
+[Unit]
+Description=Qualcomm SM7250 Hexagon Modem Subsystem Keeper
+After=android-rmt-storage.service android-pd-mapper.service tqftpserv.service
+Requires=android-rmt-storage.service android-pd-mapper.service tqftpserv.service
+Before=qcom-wlan-load.service NetworkManager.service
+
+[Service]
+Type=simple
+ExecStartPre=/bin/sh -c 'grep -q "/android/vendor/firmware_mnt" /proc/mounts || mount /android/vendor/firmware_mnt 2>/dev/null || true'
+ExecStartPre=/bin/sh -c 'for s in /sys/bus/msm_subsys/devices/subsys*; do [ -f "$s/restart_level" ] && echo RELATED > "$s/restart_level" || true; done; if [ -f /sys/class/subsys/subsys_modem/dev ]; then rm -f /dev/subsys_modem; mknod /dev/subsys_modem c $(cat /sys/class/subsys/subsys_modem/dev | tr ":" " "); fi'
+ExecStart=/bin/sh -c 'exec 3</dev/subsys_modem && exec sleep infinity'
+ExecStartPost=/bin/sh -c 'sleep 2 && [ -f /sys/module/service_locator/parameters/enable ] && echo 1 > /sys/module/service_locator/parameters/enable || true'
+Restart=always
+RestartSec=2s
+
+[Install]
+WantedBy=multi-user.target

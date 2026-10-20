@@ -21,7 +21,7 @@ chmod 666 binder hwbinder vndbinder ion kgsl-3d0 kmsg uio0 dri/* 2>/dev/null || 
 mount --bind /dev/block "$LXC_ROOTFS_MOUNT/dev/block"
 rm -f btpower ttyHS0 2>/dev/null || true
 mknod btpower c 500 0
-mknod ttyHS0 c 237 0
+mknod ttyHS0 c 236 0
 [ -e rfkill ] || mknod rfkill c 10 242
 chmod 666 btpower ttyHS0 rfkill 2>/dev/null || true
 [ -e null ] || mknod null c 1 3

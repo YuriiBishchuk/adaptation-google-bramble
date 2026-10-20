@@ -1,0 +1,13 @@
+[Unit]
+Description=Android ServiceManager (AIDL Context Manager)
+After=lxc@android.service
+Requires=lxc@android.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -- /system/bin/servicemanager
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target
