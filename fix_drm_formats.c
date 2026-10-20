@@ -53,9 +53,9 @@ static void ensure_display_active(int fd) {
     }
     // Connector 29: DSI-1
     // Property 2: DPMS -> 0 (On)
-    // Property 37: autorefresh -> 1 (Auto-push frames in command mode)
+    // Property 37: autorefresh -> 0 (Disable hardware TE autorefresh so sde_encoder_helper_trigger_start issues CTL_START)
     drmModeObjectSetProperty(fd, 29, DRM_MODE_OBJECT_CONNECTOR, 2, 0);
-    drmModeObjectSetProperty(fd, 29, DRM_MODE_OBJECT_CONNECTOR, 37, 1);
+    drmModeObjectSetProperty(fd, 29, DRM_MODE_OBJECT_CONNECTOR, 37, 0);
 }
 
 int faccessat(int dirfd, const char *pathname, int mode, int flags) {

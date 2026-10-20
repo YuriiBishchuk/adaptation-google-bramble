@@ -8,7 +8,7 @@ Before=android-composer.service
 Type=oneshot
 RemainAfterExit=yes
 TimeoutStartSec=10s
-ExecStart=/usr/bin/android-properties-bridge.sh
+ExecStart=/usr/local/bin/android-properties-bridge.sh
 
 [Install]
 WantedBy=multi-user.target

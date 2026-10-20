@@ -1,0 +1,14 @@
+[Unit]
+Description=Android Bluetooth QTI HAL Service
+After=android-hwservicemanager.service
+Requires=android-hwservicemanager.service
+Before=bluebinder.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/lxc-attach -n android -v LD_PRELOAD=/system/lib64/libhwservice_shim.so:/system/lib64/libselinux_stubs.so -- /vendor/bin/hw/android.hardware.bluetooth@1.0-service-qti
+Restart=always
+RestartSec=1s
+
+[Install]
+WantedBy=multi-user.target

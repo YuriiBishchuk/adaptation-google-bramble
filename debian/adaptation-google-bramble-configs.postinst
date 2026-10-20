@@ -30,4 +30,13 @@ if [ -f /etc/gnome-initial-setup/vendor.conf ]; then
     sed -i 's/skip=.*password.*/skip=account;parental-controls;password;timezone/' /etc/gnome-initial-setup/vendor.conf 2>/dev/null || true
 fi
 
+# Enable Bluetooth HAL and bluebinder proxy
+systemctl daemon-reload 2>/dev/null || true
+systemctl enable android-bluetooth.service bluebinder.service 2>/dev/null || true
+
+# Recompile gsettings schemas
+if [ -d /usr/share/glib-2.0/schemas ]; then
+    glib-compile-schemas /usr/share/glib-2.0/schemas/ 2>/dev/null || true
+fi
+
 exit 0
